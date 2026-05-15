@@ -7,6 +7,27 @@ Jeu de duels entre joueurs vedettes du Mondial 2026. À chaque tour deux joueurs
 - 37 joueurs (36 duels par partie)
 - Photos **non encore fournies** : un placeholder doré sur fond noir affiche les initiales de chaque joueur. Dès qu'un fichier `mondial2026/<file>.jpg` est ajouté, il remplace automatiquement le placeholder du joueur correspondant.
 
+## Récupération automatique des photos via Sportmonks
+
+Si tu as un token Sportmonks v3 (plan football), le script `fetch-photos.mjs` interroge l'API par nom et télécharge les 37 photos d'un coup :
+
+```bash
+SPORTMONKS_TOKEN=ton_token_ici node fetch-photos.mjs
+```
+
+- Le token reste local (jamais commité, lu uniquement via variable d'environnement).
+- Les photos sont enregistrées dans `mondial2026/` avec exactement les noms attendus par `script.js`.
+- En cas d'homonymie, c'est le 1er résultat de la recherche qui est pris — vérifier manuellement après run.
+- Nécessite Node 18+ (fetch natif).
+
+Pour publier les photos après le run :
+
+```bash
+git add mondial2026/*.jpg
+git commit -m "Ajout des photos depuis Sportmonks"
+git push
+```
+
 ## Fonctionnalités
 
 - Thème or / noir / blanc
