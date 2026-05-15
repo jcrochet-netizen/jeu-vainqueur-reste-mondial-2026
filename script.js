@@ -140,8 +140,10 @@ function startGame() {
   renderDuel();
 }
 
+const TOTAL_DUELS = PLAYERS.length - 1;
+
 function renderDuel() {
-  roundNum.textContent = state.round;
+  roundNum.textContent = `${state.round}/${TOTAL_DUELS}`;
 
   setImage(imgLeft, placeholderL, state.champion);
   nameLeft.textContent = state.champion.name;
