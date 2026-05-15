@@ -54,14 +54,7 @@ const state = {
   challenger: null,
   round: 1,
   history: [],
-  prevChampion: null,    // pour détecter si la carte gauche change
-  prevChallenger: null,  // pour détecter si la carte droite change
 };
-
-// Durée de la rotation 360° (en ms). Voir style.css @keyframes cardFlip.
-// Le swap de contenu se fait pendant la pause sur le dos (entre 20% et 35%).
-const FLIP_DURATION = 1500;
-const FLIP_SWAP_AT  = 380; // ms : pile au milieu de la pause sur le dos
 
 // ============================================================
 //  DOM refs
@@ -140,63 +133,23 @@ function startGame() {
   state.challenger = state.pool.shift();
   state.round = 1;
   state.history = [];
-  state.prevChampion = null;
-  state.prevChallenger = null;
 
   endEl.classList.add("hidden");
   duelEl.style.display = "";
   historyList.innerHTML = "";
-  renderDuel({ flip: false });
+  renderDuel();
 }
 
 const TOTAL_DUELS = PLAYERS.length - 1;
 
-// Pose le contenu d'une carte sans animation (1er rendu).
-function setCardContent(imgEl, placeholderEl, nameEl, player) {
-  setImage(imgEl, placeholderEl, player);
-  nameEl.textContent = player.name;
-}
-
-// Anime un flip 360° sur la carte. Le contenu est swappé à mi-flip,
-// pendant que le dos de la carte fait face à l'utilisateur.
-function flipCardTo(cardEl, imgEl, placeholderEl, nameEl, player) {
-  const flipper = cardEl.querySelector(".photo-inner");
-  if (!flipper) return setCardContent(imgEl, placeholderEl, nameEl, player);
-
-  // Reset et déclenchement de l'animation
-  flipper.classList.remove("flipping");
-  void flipper.offsetWidth; // force reflow
-  flipper.classList.add("flipping");
-
-  // Pendant la pause sur le dos (entre 20% et 35% de l'animation),
-  // on swap le contenu : la face avant est hors-champ donc invisible.
-  setTimeout(() => {
-    setCardContent(imgEl, placeholderEl, nameEl, player);
-  }, FLIP_SWAP_AT);
-
-  // Nettoyage de la classe en fin d'animation
-  setTimeout(() => {
-    flipper.classList.remove("flipping");
-  }, FLIP_DURATION + 20);
-}
-
-function renderDuel({ flip = true } = {}) {
+function renderDuel() {
   roundNum.textContent = `${state.round}/${TOTAL_DUELS}`;
 
-  const championChanged   = !state.prevChampion   || state.prevChampion.file   !== state.champion.file;
-  const challengerChanged = !state.prevChallenger || state.prevChallenger.file !== state.challenger.file;
+  setImage(imgLeft, placeholderL, state.champion);
+  nameLeft.textContent = state.champion.name;
 
-  if (championChanged) {
-    if (flip) flipCardTo(cardLeft,  imgLeft,  placeholderL, nameLeft,  state.champion);
-    else      setCardContent(imgLeft, placeholderL, nameLeft, state.champion);
-  }
-  if (challengerChanged) {
-    if (flip) flipCardTo(cardRight, imgRight, placeholderR, nameRight, state.challenger);
-    else      setCardContent(imgRight, placeholderR, nameRight, state.challenger);
-  }
-
-  state.prevChampion   = state.champion;
-  state.prevChallenger = state.challenger;
+  setImage(imgRight, placeholderR, state.challenger);
+  nameRight.textContent = state.challenger.name;
 
   cardLeft.classList.remove("winner", "loser");
   cardRight.classList.remove("winner", "loser");
