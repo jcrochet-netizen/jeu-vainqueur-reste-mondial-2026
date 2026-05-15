@@ -58,9 +58,10 @@ const state = {
   prevChallenger: null,  // pour détecter si la carte droite change
 };
 
-// Durée de la rotation 360° (en ms). Le swap de photo se fait à la moitié,
-// quand le dos de la carte fait face au joueur.
-const FLIP_DURATION = 700;
+// Durée de la rotation 360° (en ms). Voir style.css @keyframes cardFlip.
+// Le swap de contenu se fait pendant la pause sur le dos (entre 20% et 35%).
+const FLIP_DURATION = 1500;
+const FLIP_SWAP_AT  = 380; // ms : pile au milieu de la pause sur le dos
 
 // ============================================================
 //  DOM refs
@@ -167,10 +168,11 @@ function flipCardTo(cardEl, imgEl, placeholderEl, nameEl, player) {
   void flipper.offsetWidth; // force reflow
   flipper.classList.add("flipping");
 
-  // Au milieu de l'animation (le dos est face au viewer), on swap le contenu
+  // Pendant la pause sur le dos (entre 20% et 35% de l'animation),
+  // on swap le contenu : la face avant est hors-champ donc invisible.
   setTimeout(() => {
     setCardContent(imgEl, placeholderEl, nameEl, player);
-  }, FLIP_DURATION / 2);
+  }, FLIP_SWAP_AT);
 
   // Nettoyage de la classe en fin d'animation
   setTimeout(() => {
