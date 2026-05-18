@@ -111,13 +111,13 @@ html, body {
     max-width: 100%;
   }
 
-  .vs { font-size: 8px; letter-spacing: 0.5px; }
-  .vs span { padding: 2px 4px; border-width: 1px; }
+  .vs { font-size: 7px; letter-spacing: 0.3px; }
+  .vs span { padding: 1.5px 3px; border-width: 1px; }
 
   .card-body { padding: 10px 8px 14px; }
   .card-tag { font-size: 11px; letter-spacing: 1px; margin-bottom: 5px; }
   .card-body h2 { font-size: 16px; margin-bottom: 10px; }
-  .choose-btn { font-size: 9px; padding: 4px 8px; white-space: nowrap; }
+  .choose-btn { font-size: 8px; padding: 3px 6px; white-space: nowrap; }
 }
 
 .card {
