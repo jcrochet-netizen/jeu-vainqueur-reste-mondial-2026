@@ -87,7 +87,7 @@ function shuffle(arr) {
 }
 
 function imgPath(p) {
-  return `mondial2026/${p.file}`;
+  return `images/${p.file}`;
 }
 
 const _imgCache = new Map();
