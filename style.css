@@ -193,7 +193,7 @@ html, body {
 }
 
 .card-body {
-  padding: 10px 10px 14px;
+  padding: 12px 12px 18px;
   text-align: center;
 }
 
@@ -208,10 +208,10 @@ html, body {
 }
 
 .card-body h2 {
-  margin: 0 0 8px;
-  font-size: 15px;
+  margin: 0 0 12px;
+  font-size: 20px;
   font-weight: 800;
-  letter-spacing: -0.2px;
+  letter-spacing: -0.3px;
   color: var(--texte);
 }
 
@@ -219,13 +219,13 @@ html, body {
   background: linear-gradient(135deg, var(--or-clair) 0%, var(--or-fonce) 100%);
   color: var(--noir);
   border: none;
-  padding: 7px 14px;
+  padding: 10px 22px;
   border-radius: 999px;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 800;
   cursor: pointer;
   transition: transform 0.15s ease, filter 0.2s ease;
-  box-shadow: 0 6px 14px rgba(212, 175, 55, 0.35);
+  box-shadow: 0 8px 18px rgba(212, 175, 55, 0.4);
 }
 
 .choose-btn:hover {
