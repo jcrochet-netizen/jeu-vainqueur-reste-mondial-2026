@@ -54,6 +54,7 @@ const state = {
   challenger: null,
   round: 1,
   history: [],
+  locked: false,
 };
 
 // ============================================================
@@ -184,19 +185,23 @@ function pick(side) {
   undoBtn.disabled = false;
 
   setTimeout(() => {
-    state.champion = winner;
+    // try/finally pour garantir que le verrou est toujours relache,
+    // meme si une exception survient dans le rendu ou showEnd.
+    try {
+      state.champion = winner;
 
-    if (state.pool.length === 0) {
+      if (state.pool.length === 0) {
+        showEnd();
+        return;
+      }
+
+      state.challenger = state.pool.shift();
+      state.round += 1;
+      renderDuel();
+      preloadOne(state.pool[0]);
+    } finally {
       state.locked = false;
-      showEnd();
-      return;
     }
-
-    state.challenger = state.pool.shift();
-    state.round += 1;
-    renderDuel();
-    preloadOne(state.pool[0]);
-    state.locked = false;
   }, 480);
 }
 
