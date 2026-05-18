@@ -220,28 +220,6 @@ function showEnd() {
 // ============================================================
 //  Téléchargements
 // ============================================================
-function downloadText() {
-  const lines = [
-    "🏆 LE VAINQUEUR RESTE — MONDIAL 2026",
-    "=".repeat(40),
-    "",
-    ...state.history.map(
-      (h) => `Duel ${h.round}: ${h.winner.name}  ✓   vs   ${h.loser.name}  ✗`
-    ),
-    "",
-    state.pool.length === 0 && state.history.length > 0
-      ? `🏆 Joueur préféré : ${state.champion.name}`
-      : `Champion actuel : ${state.champion.name}`,
-  ];
-  const blob = new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "vainqueur-reste-mondial-2026.txt";
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
 async function downloadImage() {
   const target = document.getElementById("recap-block");
   const actions = target.querySelector(".history-actions");
@@ -324,7 +302,6 @@ cardLeft.addEventListener("click", () => pick("left"));
 cardRight.addEventListener("click", () => pick("right"));
 
 $("restart-btn").addEventListener("click", startGame);
-$("download-txt").addEventListener("click", downloadText);
 $("download-img").addEventListener("click", downloadImage);
 
 document.querySelectorAll(".share-btn").forEach((btn) =>
