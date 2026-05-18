@@ -112,7 +112,7 @@ html, body {
   }
 
   .vs { font-size: 7px; letter-spacing: 0.3px; }
-  .vs span { padding: 1.5px 3px; border-width: 1px; }
+  .vs span { padding: 0px 2px; border-width: 1px; }
 
   .card-body { padding: 10px 8px 14px; }
   .card-tag { font-size: 11px; letter-spacing: 1px; margin-bottom: 5px; }
