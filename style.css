@@ -103,7 +103,19 @@ html, body {
 }
 
 @media (max-width: 760px) {
-  .duel { grid-template-columns: 1fr; max-width: 280px; }
+  /* On garde 2 cartes cote a cote, juste plus petites */
+  .duel {
+    gap: 10px;
+    max-width: 100%;
+  }
+
+  .vs { font-size: 13px; letter-spacing: 1px; }
+  .vs span { padding: 5px 8px; }
+
+  .card-body { padding: 8px 6px 12px; }
+  .card-tag { font-size: 10px; letter-spacing: 1px; margin-bottom: 4px; }
+  .card-body h2 { font-size: 14px; margin-bottom: 8px; }
+  .choose-btn { font-size: 12px; padding: 8px 14px; }
 }
 
 .card {
