@@ -263,6 +263,36 @@ html, body {
   background: rgba(212, 175, 55, 0.12);
 }
 
+/* UNDO */
+.undo-wrap {
+  display: flex;
+  justify-content: center;
+  margin: -8px 0 22px;
+}
+
+.undo-btn {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.undo-btn:not(:disabled):hover {
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--or-clair);
+  border-color: var(--or);
+}
+
+.undo-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
 /* HISTORY + RESULT */
 .history-section {
   background: rgba(255, 255, 255, 0.04);

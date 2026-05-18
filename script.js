@@ -73,6 +73,7 @@ const endEl         = $("endscreen");
 const placeholderL  = $("placeholder-left");
 const placeholderR  = $("placeholder-right");
 const placeholderC  = $("placeholder-champion");
+const undoBtn       = $("undo-btn");
 
 // ============================================================
 //  Utils
@@ -133,10 +134,12 @@ function startGame() {
   state.challenger = state.pool.shift();
   state.round = 1;
   state.history = [];
+  state.locked = false;
 
   endEl.classList.add("hidden");
   duelEl.style.display = "";
   historyList.innerHTML = "";
+  undoBtn.disabled = true;
   renderDuel();
 }
 
@@ -159,19 +162,32 @@ function renderDuel() {
 //  Choix utilisateur
 // ============================================================
 function pick(side) {
+  if (state.locked) return;
+  state.locked = true;
+
   const winner = side === "left" ? state.champion : state.challenger;
   const loser  = side === "left" ? state.challenger : state.champion;
 
   (side === "left" ? cardLeft  : cardRight).classList.add("winner");
   (side === "left" ? cardRight : cardLeft ).classList.add("loser");
 
-  state.history.push({ round: state.round, winner, loser });
+  // On capture l'etat AVANT mise a jour pour pouvoir le restaurer via undo()
+  state.history.push({
+    round: state.round,
+    winner,
+    loser,
+    side,
+    prevChampion: state.champion,
+    prevChallenger: state.challenger,
+  });
   renderHistory();
+  undoBtn.disabled = false;
 
   setTimeout(() => {
     state.champion = winner;
 
     if (state.pool.length === 0) {
+      state.locked = false;
       showEnd();
       return;
     }
@@ -180,7 +196,34 @@ function pick(side) {
     state.round += 1;
     renderDuel();
     preloadOne(state.pool[0]);
+    state.locked = false;
   }, 480);
+}
+
+// Restaure l'etat d'avant la derniere selection.
+function undo() {
+  if (state.locked) return;
+  if (state.history.length === 0) return;
+
+  const popped = state.history.pop();
+
+  // Si on n'etait pas a l'ecran de fin, c'est que state.challenger
+  // courant venait de pool.shift() : on le remet au debut du pool.
+  const onEndscreen = !endEl.classList.contains("hidden");
+  if (!onEndscreen) {
+    state.pool.unshift(state.challenger);
+  }
+
+  state.champion = popped.prevChampion;
+  state.challenger = popped.prevChallenger;
+  state.round = popped.round;
+
+  endEl.classList.add("hidden");
+  duelEl.style.display = "";
+
+  renderDuel();
+  renderHistory();
+  undoBtn.disabled = state.history.length === 0;
 }
 
 // ============================================================
@@ -303,6 +346,7 @@ cardRight.addEventListener("click", () => pick("right"));
 
 $("restart-btn").addEventListener("click", startGame);
 $("download-img").addEventListener("click", downloadImage);
+undoBtn.addEventListener("click", undo);
 
 document.querySelectorAll(".share-btn").forEach((btn) =>
   btn.addEventListener("click", () => share(btn.dataset.network))
