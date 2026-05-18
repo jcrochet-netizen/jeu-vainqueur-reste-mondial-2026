@@ -117,7 +117,7 @@ html, body {
   .card-body { padding: 10px 8px 14px; }
   .card-tag { font-size: 11px; letter-spacing: 1px; margin-bottom: 5px; }
   .card-body h2 { font-size: 16px; margin-bottom: 10px; }
-  .choose-btn { font-size: 13px; padding: 9px 16px; }
+  .choose-btn { font-size: 11px; padding: 6px 10px; white-space: nowrap; }
 }
 
 .card {
