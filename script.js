@@ -289,8 +289,8 @@ window.addEventListener("message", (e) => {
 function share(network) {
   const url = hostUrl;
   const text = state.history.length > 0
-    ? `Mon joueur préféré pour le moment : ${state.champion.name} ! Joue au Vainqueur reste — Édition Mondial 2026 🏆⚽`
-    : `Joue au Vainqueur reste — Édition Mondial 2026 🏆⚽ — qui est ton joueur préféré ?`;
+    ? `Mon joueur préféré pour le moment : ${state.champion.name} ! Joue au jeu : 'Le Vainqueur reste — Édition Mondial 2026' 🏆⚽`
+    : `Joue au jeu : 'Le Vainqueur reste — Édition Mondial 2026' 🏆⚽ — qui est ton joueur préféré ?`;
 
   const enc = encodeURIComponent;
   const links = {
