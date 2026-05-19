@@ -5,44 +5,48 @@
 //  `mondial2026/<file>` existe, il remplace automatiquement le
 //  placeholder sans modification de code.
 // ============================================================
+// `rank` controle l'ordre d'apparition des joueurs : on tire d'abord
+// tous les joueurs de rang 1 (melanges), puis rang 2, puis 3, et enfin
+// rang 4 (les top stars). Cela evite les affiches Messi vs Mbappe dans
+// les premiers duels. Modifie librement le rank de chaque joueur.
 const PLAYERS = [
-  { file: "mbappe.jpg",          name: "Kylian Mbappé",      initials: "KM"  },
-  { file: "dembele.jpg",         name: "Ousmane Dembélé",    initials: "OD"  },
-  { file: "olise.jpg",           name: "Michael Olise",      initials: "MO"  },
-  { file: "kane.jpg",            name: "Harry Kane",         initials: "HK"  },
-  { file: "saka.jpg",            name: "Bukayo Saka",        initials: "BS"  },
-  { file: "yamal.jpg",           name: "Lamine Yamal",       initials: "LY"  },
-  { file: "pedri.jpg",           name: "Pedri",              initials: "PE"  },
-  { file: "cubarsi.jpg",         name: "Pau Cubarsí",        initials: "PC"  },
-  { file: "dejong.jpg",          name: "Frenkie de Jong",    initials: "FJ"  },
-  { file: "kimmich.jpg",         name: "Joshua Kimmich",     initials: "JK"  },
-  { file: "musiala.jpg",         name: "Jamal Musiala",      initials: "JM"  },
-  { file: "wirtz.jpg",           name: "Florian Wirtz",      initials: "FW"  },
-  { file: "pulisic.jpg",         name: "Christian Pulisic",  initials: "CP"  },
-  { file: "davies.jpg",          name: "Alphonso Davies",    initials: "AD"  },
-  { file: "messi.jpg",           name: "Lionel Messi",       initials: "LM"  },
-  { file: "alvarez.jpg",         name: "Julián Álvarez",     initials: "JA"  },
-  { file: "vinicius.jpg",        name: "Vinicius",           initials: "VI"  },
-  { file: "raphinha.jpg",        name: "Raphinha",           initials: "RA"  },
-  { file: "marquinhos.jpg",      name: "Marquinhos",         initials: "MA"  },
-  { file: "mendes.jpg",          name: "Nuno Mendes",        initials: "NM"  },
-  { file: "bruno-fernandes.jpg", name: "Bruno Fernandes",    initials: "BF"  },
-  { file: "ronaldo.jpg",         name: "Cristiano Ronaldo",  initials: "CR"  },
-  { file: "debruyne.jpg",        name: "Kevin De Bruyne",    initials: "KDB" },
-  { file: "doku.jpg",            name: "Jérémy Doku",        initials: "JD"  },
-  { file: "modric.jpg",          name: "Luka Modric",        initials: "LM"  },
-  { file: "hakimi.jpg",          name: "Achraf Hakimi",      initials: "AH"  },
-  { file: "diaz.jpg",            name: "Luis Díaz",          initials: "LD"  },
-  { file: "valverde.jpg",        name: "Federico Valverde",  initials: "FV"  },
-  { file: "mane.jpg",            name: "Sadio Mané",         initials: "SM"  },
-  { file: "haaland.jpg",         name: "Erling Haaland",     initials: "EH"  },
-  { file: "salah.jpg",           name: "Mohamed Salah",      initials: "MS"  },
-  { file: "mahrez.jpg",          name: "Riyad Mahrez",       initials: "RM"  },
-  { file: "mctominay.jpg",       name: "Scott McTominay",    initials: "SM"  },
-  { file: "diomande.jpg",        name: "Yan Diomandé",       initials: "YD"  },
-  { file: "isak.jpg",            name: "Alexander Isak",     initials: "AI"  },
-  { file: "yildiz.jpg",          name: "Kenan Yildiz",       initials: "KY"  },
-  { file: "martinez.jpg",        name: "Lautaro Martínez",   initials: "LM"  },
+  { file: "mbappe.jpg",          name: "Kylian Mbappé",      initials: "KM",  rank: 4 },
+  { file: "dembele.jpg",         name: "Ousmane Dembélé",    initials: "OD",  rank: 2 },
+  { file: "olise.jpg",           name: "Michael Olise",      initials: "MO",  rank: 2 },
+  { file: "kane.jpg",            name: "Harry Kane",         initials: "HK",  rank: 3 },
+  { file: "saka.jpg",            name: "Bukayo Saka",        initials: "BS",  rank: 3 },
+  { file: "yamal.jpg",           name: "Lamine Yamal",       initials: "LY",  rank: 4 },
+  { file: "pedri.jpg",           name: "Pedri",              initials: "PE",  rank: 4 },
+  { file: "cubarsi.jpg",         name: "Pau Cubarsí",        initials: "PC",  rank: 1 },
+  { file: "dejong.jpg",          name: "Frenkie de Jong",    initials: "FJ",  rank: 2 },
+  { file: "kimmich.jpg",         name: "Joshua Kimmich",     initials: "JK",  rank: 2 },
+  { file: "musiala.jpg",         name: "Jamal Musiala",      initials: "JM",  rank: 3 },
+  { file: "wirtz.jpg",           name: "Florian Wirtz",      initials: "FW",  rank: 3 },
+  { file: "pulisic.jpg",         name: "Christian Pulisic",  initials: "CP",  rank: 2 },
+  { file: "davies.jpg",          name: "Alphonso Davies",    initials: "AD",  rank: 2 },
+  { file: "messi.jpg",           name: "Lionel Messi",       initials: "LM",  rank: 4 },
+  { file: "alvarez.jpg",         name: "Julián Álvarez",     initials: "JA",  rank: 3 },
+  { file: "vinicius.jpg",        name: "Vinicius",           initials: "VI",  rank: 4 },
+  { file: "raphinha.jpg",        name: "Raphinha",           initials: "RA",  rank: 2 },
+  { file: "marquinhos.jpg",      name: "Marquinhos",         initials: "MA",  rank: 2 },
+  { file: "mendes.jpg",          name: "Nuno Mendes",        initials: "NM",  rank: 1 },
+  { file: "bruno-fernandes.jpg", name: "Bruno Fernandes",    initials: "BF",  rank: 3 },
+  { file: "ronaldo.jpg",         name: "Cristiano Ronaldo",  initials: "CR",  rank: 4 },
+  { file: "debruyne.jpg",        name: "Kevin De Bruyne",    initials: "KDB", rank: 3 },
+  { file: "doku.jpg",            name: "Jérémy Doku",        initials: "JD",  rank: 1 },
+  { file: "modric.jpg",          name: "Luka Modric",        initials: "LM",  rank: 3 },
+  { file: "hakimi.jpg",          name: "Achraf Hakimi",      initials: "AH",  rank: 3 },
+  { file: "diaz.jpg",            name: "Luis Díaz",          initials: "LD",  rank: 1 },
+  { file: "valverde.jpg",        name: "Federico Valverde",  initials: "FV",  rank: 2 },
+  { file: "mane.jpg",            name: "Sadio Mané",         initials: "SM",  rank: 2 },
+  { file: "haaland.jpg",         name: "Erling Haaland",     initials: "EH",  rank: 4 },
+  { file: "salah.jpg",           name: "Mohamed Salah",      initials: "MS",  rank: 4 },
+  { file: "mahrez.jpg",          name: "Riyad Mahrez",       initials: "RM",  rank: 1 },
+  { file: "mctominay.jpg",       name: "Scott McTominay",    initials: "SM",  rank: 1 },
+  { file: "diomande.jpg",        name: "Yan Diomandé",       initials: "YD",  rank: 1 },
+  { file: "isak.jpg",            name: "Alexander Isak",     initials: "AI",  rank: 1 },
+  { file: "yildiz.jpg",          name: "Kenan Yildiz",       initials: "KY",  rank: 1 },
+  { file: "martinez.jpg",        name: "Lautaro Martínez",   initials: "LM",  rank: 3 },
 ];
 
 // ============================================================
@@ -88,6 +92,23 @@ function shuffle(arr) {
   return a;
 }
 
+// Construit le pool en respectant l'ordre des rangs :
+// rang 1 melange, puis rang 2 melange, puis 3, puis 4.
+// Les joueurs sans `rank` defini sont assimiles au rang 4 (en fin).
+function buildPool() {
+  const byRank = [[], [], [], []];
+  PLAYERS.forEach((p) => {
+    const r = Math.max(1, Math.min(4, p.rank || 4));
+    byRank[r - 1].push(p);
+  });
+  return [
+    ...shuffle(byRank[0]),
+    ...shuffle(byRank[1]),
+    ...shuffle(byRank[2]),
+    ...shuffle(byRank[3]),
+  ];
+}
+
 function imgPath(p) {
   return `images/${p.file}`;
 }
@@ -130,7 +151,7 @@ function setImage(imgEl, placeholderEl, player) {
 function startGame() {
   preloadAll();
 
-  state.pool = shuffle(PLAYERS);
+  state.pool = buildPool();
   state.champion = state.pool.shift();
   state.challenger = state.pool.shift();
   state.round = 1;
