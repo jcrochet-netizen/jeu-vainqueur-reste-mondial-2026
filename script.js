@@ -36,7 +36,7 @@ const PLAYERS = [
   { file: "doku.jpg",            name: "Jérémy Doku",        initials: "JD",  rank: 1 },
   { file: "modric.jpg",          name: "Luka Modric",        initials: "LM",  rank: 3 },
   { file: "hakimi.jpg",          name: "Achraf Hakimi",      initials: "AH",  rank: 3 },
-  { file: "diaz.jpg",            name: "Luis Díaz",          initials: "LD",  rank: 1 },
+  { file: "diaz.jpg",            name: "Luis Díaz",          initials: "LD",  rank: 2 },
   { file: "valverde.jpg",        name: "Federico Valverde",  initials: "FV",  rank: 2 },
   { file: "mane.jpg",            name: "Sadio Mané",         initials: "SM",  rank: 2 },
   { file: "haaland.jpg",         name: "Erling Haaland",     initials: "EH",  rank: 4 },
