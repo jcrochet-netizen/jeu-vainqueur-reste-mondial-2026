@@ -46,7 +46,7 @@ const PLAYERS = [
   { file: "diomande.jpg",        name: "Yan Diomandé",       initials: "YD",  rank: 1 },
   { file: "isak.jpg",            name: "Alexander Isak",     initials: "AI",  rank: 1 },
   { file: "yildiz.jpg",          name: "Kenan Yildiz",       initials: "KY",  rank: 1 },
-  { file: "martinez.jpg",        name: "Lautaro Martínez",   initials: "LM",  rank: 2 },
+  { file: "martinez.jpg",        name: "Lautaro Martínez",   initials: "LM",  rank: 1 },
 ];
 
 // ============================================================
